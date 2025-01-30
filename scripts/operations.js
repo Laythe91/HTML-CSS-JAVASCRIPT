@@ -1,13 +1,15 @@
-let resultat = 0;
-const FIRSTNUMBER = 10;
-const SECONDNUMBER = 20;
+// Lire le contenu de la balise h1
 
-resultat = FIRSTNUMBER + SECONDNUMBER;
+const contentOfH1Tags = document.getElementsByTagName("h1");
 
-// le resultat doit être 30
-console.log("La somme ", resultat);
+// Afficher le contenu des balises H1
+console.log(contentOfH1Tags);
 
-resultat = FIRSTNUMBER * SECONDNUMBER;
+// contenu de la première balise h1
+const firstH1 = contentOfH1Tags[0];
+console.log(firstH1.innerHTML);
 
-// le resultat doit être 200
-console.log("Le produit ", resultat);
+//Libelle du bouton
+const button = document.getElementById("calculer");
+const buttonLabel = button.innerText;
+console.log(buttonLabel);
