@@ -1,0 +1,19 @@
+.result{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap:5px;
+}
+
+#Initial{
+    background-color: gray;
+    border: solid 1px;
+    padding: 1px 9px 1px 9px;
+    border-radius: 25px;
+}
+
+#Initial:empty {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
