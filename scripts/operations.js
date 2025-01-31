@@ -1,6 +1,9 @@
 function calculer(event) {
   event.preventDefault();
   console.log("Effectuer un calcul");
+  const PrenomInput = document.getElementById("prenom");
+  const valueOfPrenomInput = PrenomInput.value;
+
   const FirstNumberInput = document.getElementById("premierNombre");
   const valueOfFirstNumberInput = FirstNumberInput.value;
 
@@ -32,7 +35,8 @@ function calculer(event) {
       break;
   }
 
-  console.log(resultat);
+  console.log(prenom);
 
-  document.getElementById("result").innerHTML = resultat;
+  document.getElementById("result").innerHTML =
+    valueOfPrenomInput + " le résultat est " + resultat;
 }
