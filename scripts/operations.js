@@ -1,15 +1,14 @@
-// Lire le contenu de la balise h1
+function calculer() {
+  console.log("Effectuer un calcul");
+  const FirstNumberInput = document.getElementById("firstNumber");
+  const valueOfFirstNumberInput = FirstNumberInput.value;
 
-const contentOfH1Tags = document.getElementsByTagName("h1");
+  const SecondNumberInput = document.getElementById("secondNumber");
+  const valueOfSecondNumberInput = SecondNumberInput.value;
 
-// Afficher le contenu des balises H1
-console.log(contentOfH1Tags);
+  let resultat =
+    Number(valueOfFirstNumberInput) + Number(valueOfSecondNumberInput);
+  console.log(resultat);
 
-// contenu de la première balise h1
-const firstH1 = contentOfH1Tags[0];
-console.log(firstH1.innerHTML);
-
-//Libelle du bouton
-const button = document.getElementById("calculer");
-const buttonLabel = button.innerText;
-console.log(buttonLabel);
+  document.getElementById("result").innerHTML = resultat;
+}
