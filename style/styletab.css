@@ -1,0 +1,54 @@
+.entete{
+    margin:10px 0px 10px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.boutton{
+    display: flex;
+    gap: 0; /* Aucune marge entre les boutons */
+}
+
+.titre {
+    margin-bottom:0;
+}
+
+
+/* Mode Tableau (par défaut, pas besoin de changer) */
+#users-body {
+    display: table-row-group;
+}
+
+/* Mode Grille */
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+    gap: 15px;
+    padding: 0px;
+}
+    
+
+.grid-view-active .user-card  div{
+    padding-bottom: 4px;
+    background-color: white;
+    color: black;
+    
+}
+
+.grid-view-active .user-card  div strong{
+    font-size : 22px ;
+    
+}
+
+.grid-view-active .user-card{
+    background-color: white;
+    border: 1px solid black;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+
+
+.grid-view-active thead{
+    display:none;
+}
