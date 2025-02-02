@@ -1,4 +1,6 @@
 let users = [];
+let DispGrid = false;
+
 function handleResponse(response) {
   return response.json();
 }
@@ -9,6 +11,7 @@ const handleData = (data) => {
 };
 
 const displayTable = () => {
+  DispGrid = false;
   let tableLines = "";
   // DEPRECATED
   for (let index = 0; index < users.length; index++) {
@@ -48,6 +51,7 @@ const displayTable = () => {
 };
 
 const displayGrid = () => {
+  DispGrid = true;
   let cells = "";
   users.forEach((user) => {
     const cell = `
@@ -88,17 +92,18 @@ const displayGrid = () => {
   usersGrid.innerHTML = usersAsCells.join("");
 };
 
-const search = () => {
+const chercher = () => {
   const searchInput = document.getElementById("search");
   const filterCriteria = searchInput.value;
-  const usersAsCells = users
-    .filter(
-      ({ name }) =>
-        name.toLowerCase().indexOf(filterCriteria.toLowerCase()) > -1
-    )
-    .map(
-      (user) =>
-        `
+  if (DispGrid) {
+    const usersAsCells = users
+      .filter(
+        ({ name }) =>
+          name.toLowerCase().indexOf(filterCriteria.toLowerCase()) > -1
+      )
+      .map(
+        (user) =>
+          `
             <div class="col">
               <div class="card">
                   <div class="card-body">
@@ -108,18 +113,45 @@ const search = () => {
               </div></div>
               </div>
         `
-    );
+      );
 
-  const usersTable = document.getElementById("users-table");
-  usersTable.classList.remove("d-block");
-  usersTable.classList.add("d-none");
+    const usersTable = document.getElementById("users-table");
+    usersTable.classList.remove("d-block");
+    usersTable.classList.add("d-none");
 
-  const usersGrid = document.getElementById("users-grid");
-  usersGrid.classList.remove("d-none");
-  usersGrid.classList.add("row");
-  usersGrid.classList.add("g-4");
-  usersGrid.classList.add("row-cols-2");
-  usersGrid.innerHTML = usersAsCells.join("");
+    const usersGrid = document.getElementById("users-grid");
+    usersGrid.classList.remove("d-none");
+    usersGrid.classList.add("row");
+    usersGrid.classList.add("g-4");
+    usersGrid.classList.add("row-cols-2");
+    usersGrid.innerHTML = usersAsCells.join("");
+  } else {
+    const usersAsTable = users
+      .filter(
+        ({ name }) =>
+          name.toLowerCase().indexOf(filterCriteria.toLowerCase()) > -1
+      )
+      .map(
+        ({ name, phone, email, address: { street } }) =>
+          `
+                <tr>
+                    <td>${name}</td>
+                    <td>${phone}</td>
+                    <td>${email}</td>
+                    <td>${street}</td>
+                </tr>
+            `
+      );
+
+    const usersGrid = document.getElementById("users-grid");
+    usersGrid.classList.remove("grid");
+    usersGrid.classList.add("d-none");
+
+    const table = document.getElementById("users-table");
+    table.classList.remove("d-none");
+    table.classList.add("table");
+    document.getElementById("users-body").innerHTML = usersAsTable.join("");
+  }
 };
 
 const sortUsers = () => {
