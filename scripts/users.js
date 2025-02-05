@@ -7,12 +7,16 @@ function handleResponse(response) {
 
 const handleData = (data) => {
   users = data;
-  displayTable(data);
+  if (DispGrid) {
+    displayGrid(data);
+  } else {
+    displayTable(data);
+  }
 };
 
 const displayTable = () => {
   DispGrid = false;
-  let tableLines = "";
+  /*let tableLines = "";
   // DEPRECATED
   for (let index = 0; index < users.length; index++) {
     const user = users[index];
@@ -24,7 +28,7 @@ const displayTable = () => {
           </tr>
       `;
     tableLines = tableLines + tableLine;
-  }
+  }*/
   console.log("====================================");
   console.log(users);
   console.log("====================================");
@@ -52,7 +56,7 @@ const displayTable = () => {
 
 const displayGrid = () => {
   DispGrid = true;
-  let cells = "";
+  /*let cells = "";
   users.forEach((user) => {
     const cell = `
     <div class="col">
@@ -65,7 +69,7 @@ const displayGrid = () => {
             </div>
         `;
     cells = cells + cell;
-  });
+  });*/
   const usersAsCells = users.map(
     (user) =>
       `
@@ -92,14 +96,19 @@ const displayGrid = () => {
   usersGrid.innerHTML = usersAsCells.join("");
 };
 
-const chercher = () => {
-  const searchInput = document.getElementById("search");
-  const filterCriteria = searchInput.value;
+const chercher = (event) => {
+  //const searchInput = document.getElementById("search");
+
+  //const filterCriteria = searchInput.value;
+  const {
+    target: { value },
+  } = event;
+
   if (DispGrid) {
     const usersAsCells = users
-      .filter(
-        ({ name }) =>
-          name.toLowerCase().indexOf(filterCriteria.toLowerCase()) > -1
+      .filter(({ name }) =>
+        //name.toLowerCase().indexOf(filterCriteria.toLowerCase()) > -1
+        name.toLowerCase().includes(value.toLowerCase())
       )
       .map(
         (user) =>
@@ -127,9 +136,9 @@ const chercher = () => {
     usersGrid.innerHTML = usersAsCells.join("");
   } else {
     const usersAsTable = users
-      .filter(
-        ({ name }) =>
-          name.toLowerCase().indexOf(filterCriteria.toLowerCase()) > -1
+      .filter(({ name }) =>
+        //name.toLowerCase().indexOf(filterCriteria.toLowerCase()) > -1
+        name.toLowerCase().includes(value.toLowerCase())
       )
       .map(
         ({ name, phone, email, address: { street } }) =>
@@ -168,6 +177,7 @@ const sortUsers = () => {
   });
   handleData(usersToDisplay);
 };
+
 function fetchUsers() {
   fetch("https://jsonplaceholder.typicode.com/users")
     .then((response) => handleResponse(response))
